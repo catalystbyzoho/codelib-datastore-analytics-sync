@@ -1,0 +1,17 @@
+{
+	"deployment": {
+		"name": "zoho_analytics_datastore_sync_record_handler",
+		"stack": "node16",
+		"type": "event",
+		"env_variables": {
+			"CLIENT_ID": "YOUR CLIENT_ID",
+			"CLIENT_SECRET": "YOUR CLIENT_SECRET",
+			"REFRESH_TOKEN": "YOUR REFRESH_TOKEN",
+			"ORG_ID" : "YOUR ORG_ID",
+			"WORKSPACE_ID" : "YOUR WORKSPACE_ID"
+	}
+	},
+	"execution": {
+		"main": "index.js"
+	}
+}
