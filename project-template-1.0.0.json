@@ -12,7 +12,15 @@
           "path" : "functions/zoho_analytics_datastore_sync_record_handler.zip"
         },
         "configuration" : {
-          "environment" : { },
+          "environment" : {
+            "variables" : {
+              "CLIENT_ID": "YOUR CLIENT_ID",
+              "CLIENT_SECRET": "YOUR CLIENT_SECRET",
+              "REFRESH_TOKEN": "YOUR REFRESH_TOKEN",
+              "ORG_ID" : "YOUR ORG_ID",
+              "WORKSPACE_ID" : "YOUR WORKSPACE_ID"
+            }
+           },
           "memory" : 256
         },
         "type" : "event",
@@ -28,7 +36,15 @@
           "path" : "functions/zoho_analytics_datastore_sync_routes_handler.zip"
         },
         "configuration" : {
-          "environment" : { },
+          "environment" : {
+            "variables" : {
+              "CLIENT_ID": "YOUR CLIENT_ID",
+              "CLIENT_SECRET": "YOUR CLIENT_SECRET",
+              "REFRESH_TOKEN": "YOUR REFRESH_TOKEN",
+              "AUTH_HOST" : "https://accounts.zoho.com/oauth/v2/token",
+              "CODELIB_SECRET_KEY" : "CODELIB_FAKE_KEY"
+            }
+           },
           "memory" : 256
         },
         "type" : "applogic",
