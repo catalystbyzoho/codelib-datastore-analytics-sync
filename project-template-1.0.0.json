@@ -1,0 +1,48 @@
+{
+  "name" : "project-template",
+  "version" : "1.0.0",
+  "parameters" : { },
+  "components" : {
+    "Functions" : [ {
+      "type" : "function",
+      "name" : "zoho_analytics_datastore_sync_record_handler",
+      "properties" : {
+        "stack" : "node16",
+        "code" : {
+          "path" : "functions/zoho_analytics_datastore_sync_record_handler.zip"
+        },
+        "configuration" : {
+          "environment" : { },
+          "memory" : 256
+        },
+        "type" : "event",
+        "name" : "zoho_analytics_datastore_sync_record_handler"
+      },
+      "dependsOn" : [ ]
+    }, {
+      "type" : "function",
+      "name" : "zoho_analytics_datastore_sync_routes_handler",
+      "properties" : {
+        "stack" : "node16",
+        "code" : {
+          "path" : "functions/zoho_analytics_datastore_sync_routes_handler.zip"
+        },
+        "configuration" : {
+          "environment" : { },
+          "memory" : 256
+        },
+        "type" : "applogic",
+        "name" : "zoho_analytics_datastore_sync_routes_handler"
+      },
+      "dependsOn" : [ ]
+    } ],
+    "Cache" : [ {
+      "type" : "segment",
+      "name" : "ZohoAnalyticsDatastoreSync",
+      "properties" : {
+        "segment_name" : "ZohoAnalyticsDatastoreSync"
+      },
+      "dependsOn" : [ ]
+    } ]
+  }
+}

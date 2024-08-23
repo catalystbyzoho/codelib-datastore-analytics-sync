@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "targets": [
+      "zoho_analytics_datastore_sync_routes_handler",
+      "zoho_analytics_datastore_sync_record_handler"
+    ],
+    "ignore": [],
+    "source": "functions"
+  }
+}

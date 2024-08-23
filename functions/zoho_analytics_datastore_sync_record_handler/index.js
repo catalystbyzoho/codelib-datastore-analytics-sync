@@ -23,11 +23,10 @@ module.exports = async (event, context) => {
       const workspaceId = process.env[AppConstants.Env.WorkspaceId]
       const viewId = process.env[tableName + '_' + AppConstants.Env.ViewId]
       if (!viewId) {
-        console.log('Error ::: The table name provided in the configuration is either incorrect or the format of the view ID in the configuration is wrong. The correct format should be `${tableName}_VIEW_ID`.')
+        console.log('Error ::: The table name provided in the configuration is either incorrect or the format of the view ID in the configuration is wrong. The correct format is `${tableName}_VIEW_ID`.')
         context.closeWithFailure()
       }
       const analyticsInstance = await AnalyticsService.getInstance(catalyst)
-      console.log("analyticsInstance - ", analyticsInstance);
       const viewInstance = analyticsInstance.getViewInstance(orgId, workspaceId, viewId)
       if (action === 'Insert') {
         for (let i = 0; i < data.length; i++) {

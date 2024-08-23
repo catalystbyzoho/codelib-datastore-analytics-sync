@@ -8,7 +8,7 @@ const accountsURI = 'accounts.zoho.com'
 const clientVersion = '2.1.0'
 
 class AnalyticsClient {
-  constructor(clientId, clientSecret, refreshToken) {
+  constructor (clientId, clientSecret, refreshToken) {
     this.clientId = clientId
     this.clientSecret = clientSecret
     this.refreshToken = refreshToken
@@ -21,7 +21,7 @@ class AnalyticsClient {
      * @returns {JSONArray} Organization list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getOrgs() {
+  async getOrgs () {
     const uriPath = '/restapi/v2/orgs'
     const header = {}
     const result = await this.handleV2Request(uriPath, 'GET', null, header)
@@ -34,7 +34,7 @@ class AnalyticsClient {
      * @returns {JSONArray} Workspace list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getWorkspaces() {
+  async getWorkspaces () {
     const uriPath = '/restapi/v2/workspaces'
     const header = {}
     const result = await this.handleV2Request(uriPath, 'GET', null, header)
@@ -47,7 +47,7 @@ class AnalyticsClient {
      * @returns {JSONArray} Workspace list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getOwnedWorkspaces() {
+  async getOwnedWorkspaces () {
     const uriPath = '/restapi/v2/workspaces/owned'
     const header = {}
     const result = await this.handleV2Request(uriPath, 'GET', null, header)
@@ -60,7 +60,7 @@ class AnalyticsClient {
      * @returns {JSONArray} Workspace list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getSharedWorkspaces(config = {}) {
+  async getSharedWorkspaces (config = {}) {
     const uriPath = '/restapi/v2/workspaces/shared'
     const header = {}
     const result = await this.handleV2Request(uriPath, 'GET', null, header)
@@ -73,7 +73,7 @@ class AnalyticsClient {
      * @returns {JSONArray} View list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getRecentViews() {
+  async getRecentViews () {
     const uriPath = '/restapi/v2/recentviews'
     const header = {}
     const result = await this.handleV2Request(uriPath, 'GET', null, header)
@@ -86,7 +86,7 @@ class AnalyticsClient {
      * @returns {JSONArray} Dashboard list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getDashboards() {
+  async getDashboards () {
     const uriPath = '/restapi/v2/dashboards'
     const header = {}
     const result = await this.handleV2Request(uriPath, 'GET', null, header)
@@ -99,7 +99,7 @@ class AnalyticsClient {
      * @returns {JSONArray} Dashboard list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getOwnedDashboards() {
+  async getOwnedDashboards () {
     const uriPath = '/restapi/v2/dashboards/owned'
     const header = {}
     const result = await this.handleV2Request(uriPath, 'GET', null, header)
@@ -112,7 +112,7 @@ class AnalyticsClient {
      * @returns {JSONArray} Dashboard list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getSharedDashboards() {
+  async getSharedDashboards () {
     const uriPath = '/restapi/v2/dashboards/shared'
     const header = {}
     const result = await this.handleV2Request(uriPath, 'GET', null, header)
@@ -126,7 +126,7 @@ class AnalyticsClient {
      * @returns {Object} Workspace details.
      * @throws {Error} If the request failed due to some error.
      */
-  async getWorkspaceDetails(workspaceId) {
+  async getWorkspaceDetails (workspaceId) {
     const uriPath = '/restapi/v2/workspaces/' + workspaceId
     const header = {}
     const result = await this.handleV2Request(uriPath, 'GET', null, header)
@@ -141,7 +141,7 @@ class AnalyticsClient {
      * @returns {Object} View details.
      * @throws {Error} If the request failed due to some error.
      */
-  async getViewDetails(viewId, config = {}) {
+  async getViewDetails (viewId, config = {}) {
     const uriPath = '/restapi/v2/views/' + viewId
     const header = {}
     const result = await this.handleV2Request(uriPath, 'GET', config, header)
@@ -153,7 +153,7 @@ class AnalyticsClient {
      * @method getOrgInstance
      * @param {String} orgId - The ID of the organization.
      */
-  getOrgInstance(orgId) {
+  getOrgInstance (orgId) {
     const orgInstance = new OrgAPI(this, orgId)
     return orgInstance
   }
@@ -164,7 +164,7 @@ class AnalyticsClient {
      * @param {String} orgId - The ID of the organization.
      * @param {String} workspaceId - The ID of the workspace.
      */
-  getWorkspaceInstance(orgId, workspaceId) {
+  getWorkspaceInstance (orgId, workspaceId) {
     const workspaceInstance = new WorkspaceAPI(this, orgId, workspaceId)
     return workspaceInstance
   }
@@ -176,7 +176,7 @@ class AnalyticsClient {
      * @param {String} workspaceId - The ID of the workspace.
      * @param {String} viewId - The ID of the view.
      */
-  getViewInstance(orgId, workspaceId, viewId) {
+  getViewInstance (orgId, workspaceId, viewId) {
     const viewInstance = new ViewAPI(this, orgId, workspaceId, viewId)
     return viewInstance
   }
@@ -187,12 +187,12 @@ class AnalyticsClient {
      * @param {String} orgId - The ID of the organization.
      * @param {String} workspaceId - The ID of the workspace.
      */
-  getBulkInstance(orgId, workspaceId) {
+  getBulkInstance (orgId, workspaceId) {
     const bulkInstance = new BulkAPI(this, orgId, workspaceId)
     return bulkInstance
   }
 
-  async handleImportRequest(uriPath, config, header, filePath, data = null) {
+  async handleImportRequest (uriPath, config, header, filePath, data = null) {
     if (this.accessToken == null) {
       this.accessToken = await this.getOauth()
     }
@@ -206,7 +206,7 @@ class AnalyticsClient {
     })
   }
 
-  sendImportRequest(uriPath, config, header = {}, filePath, data) {
+  sendImportRequest (uriPath, config, header = {}, filePath, data) {
     header['User-Agent'] = 'Analytics NodeJS Client v' + clientVersion
     header.Authorization = 'Zoho-oauthtoken ' + this.accessToken
 
@@ -264,7 +264,7 @@ class AnalyticsClient {
     }
   }
 
-  async handleExportRequest(uriPath, filePath, config, header) {
+  async handleExportRequest (uriPath, filePath, config, header) {
     if (this.accessToken == null) {
       this.accessToken = await this.getOauth()
     }
@@ -278,7 +278,7 @@ class AnalyticsClient {
     })
   }
 
-  sendExportRequest(uriPath, filePath, config, header = {}) {
+  sendExportRequest (uriPath, filePath, config, header = {}) {
     header['User-Agent'] = 'Analytics NodeJS Client v' + clientVersion
     header.Authorization = 'Zoho-oauthtoken ' + this.accessToken
 
@@ -305,7 +305,7 @@ class AnalyticsClient {
     })
   }
 
-  async handleV2Request(uriPath, method, config, header, isExportReq = false) {
+  async handleV2Request (uriPath, method, config, header, isExportReq = false) {
     if (this.accessToken == null) {
       this.accessToken = await this.getOauth()
     }
@@ -319,7 +319,7 @@ class AnalyticsClient {
     })
   }
 
-  sendV2Request(uriPath, reqMethod, config, header = {}, isExportReq = false) {
+  sendV2Request (uriPath, reqMethod, config, header = {}, isExportReq = false) {
     header['User-Agent'] = 'Analytics NodeJS Client v' + clientVersion
     // header.Content-Type = 'application/x-www-form-urlencoded';
     header.Authorization = 'Zoho-oauthtoken ' + this.accessToken
@@ -373,7 +373,7 @@ class AnalyticsClient {
     })
   }
 
-  getOauth() {
+  getOauth () {
     const oauthinfo = {}
     oauthinfo.client_id = this.clientId
     oauthinfo.client_secret = this.clientSecret
@@ -425,7 +425,7 @@ class AnalyticsClient {
 };
 
 class OrgAPI {
-  constructor(ac, orgId) {
+  constructor (ac, orgId) {
     this.ac = ac
     this.header = {}
     this.header['ZANALYTICS-ORGID'] = orgId
@@ -439,7 +439,7 @@ class OrgAPI {
      * @returns {String} Created workspace id.
      * @throws {Error} If the request failed due to some error.
      */
-  async createWorkspace(workspaceName, config = {}) {
+  async createWorkspace (workspaceName, config = {}) {
     const uriPath = '/restapi/v2/workspaces'
     config.workspaceName = workspaceName
     const result = await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
@@ -453,7 +453,7 @@ class OrgAPI {
      * @returns {JSONArray} Organization admin list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getAdmins(config = {}) {
+  async getAdmins (config = {}) {
     const uriPath = '/restapi/v2/orgadmins'
     const result = await this.ac.handleV2Request(uriPath, 'GET', config, this.header)
     return result.orgAdmins
@@ -465,7 +465,7 @@ class OrgAPI {
      * @returns {Object} Subscription details.
      * @throws {Error} If the request failed due to some error.
      */
-  async getSubscriptionDetails() {
+  async getSubscriptionDetails () {
     const uriPath = '/restapi/v2/subscription'
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result.subscription
@@ -477,7 +477,7 @@ class OrgAPI {
      * @returns {JSONArray} User list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getUsers() {
+  async getUsers () {
     const uriPath = '/restapi/v2/users'
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result.users
@@ -490,7 +490,7 @@ class OrgAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async addUsers(emailIds, config = {}) {
+  async addUsers (emailIds, config = {}) {
     const uriPath = '/restapi/v2/users'
     config.emailIds = emailIds
     await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
@@ -503,7 +503,7 @@ class OrgAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async removeUsers(emailIds, config = {}) {
+  async removeUsers (emailIds, config = {}) {
     const uriPath = '/restapi/v2/users'
     config.emailIds = emailIds
     await this.ac.handleV2Request(uriPath, 'DELETE', config, this.header)
@@ -516,7 +516,7 @@ class OrgAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async activateUsers(emailIds, config = {}) {
+  async activateUsers (emailIds, config = {}) {
     const uriPath = '/restapi/v2/users/active'
     config.emailIds = emailIds
     await this.ac.handleV2Request(uriPath, 'PUT', config, this.header)
@@ -529,7 +529,7 @@ class OrgAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async deActivateUsers(emailIds, config = {}) {
+  async deActivateUsers (emailIds, config = {}) {
     const uriPath = '/restapi/v2/users/inactive'
     config.emailIds = emailIds
     await this.ac.handleV2Request(uriPath, 'PUT', config, this.header)
@@ -543,7 +543,7 @@ class OrgAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async changeUserRole(emailIds, role, config = {}) {
+  async changeUserRole (emailIds, role, config = {}) {
     const uriPath = '/restapi/v2/users/role'
     config.emailIds = emailIds
     config.role = role
@@ -559,7 +559,7 @@ class OrgAPI {
      * @returns {Object} Workspace (or) View meta details.
      * @throws {Error} If the request failed due to some error.
      */
-  async getMetaDetails(workspaceName, viewName = null, config = {}) {
+  async getMetaDetails (workspaceName, viewName = null, config = {}) {
     const uriPath = '/restapi/v2/metadetails'
     config.workspaceName = workspaceName
     if (viewName !== null) {
@@ -572,7 +572,7 @@ class OrgAPI {
 }
 
 class WorkspaceAPI {
-  constructor(ac, orgId, workspaceId) {
+  constructor (ac, orgId, workspaceId) {
     this.ac = ac
     this.uriPath = '/restapi/v2/workspaces/' + workspaceId
     this.header = {}
@@ -589,7 +589,7 @@ class WorkspaceAPI {
      * @returns {String} Copied workspace id.
      * @throws {Error} If the request failed due to some error.
      */
-  async copy(workspaceName, config = {}, destOrgId = null) {
+  async copy (workspaceName, config = {}, destOrgId = null) {
     config.newWorkspaceName = workspaceName
     const reqHeader = this.header
     if (destOrgId != null) {
@@ -606,7 +606,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async rename(workspaceName, config = {}) {
+  async rename (workspaceName, config = {}) {
     config.workspaceName = workspaceName
     await this.ac.handleV2Request(this.uriPath, 'PUT', config, this.header)
   }
@@ -617,7 +617,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async delete(config = {}) {
+  async delete (config = {}) {
     await this.ac.handleV2Request(this.uriPath, 'DELETE', config, this.header)
   }
 
@@ -629,11 +629,10 @@ class WorkspaceAPI {
      * @returns {String} created table id.
      * @throws {Error} If the request failed due to some error.
      */
-  async createTable(tableDesign, config = {}) {
+  async createTable (tableDesign, config = {}) {
     const uriPath = this.uriPath + '/tables'
     config.tableDesign = tableDesign
     const result = await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
-    console.log("Res - ", result)
     return result.viewId
   }
 
@@ -644,7 +643,7 @@ class WorkspaceAPI {
      * @returns {String} Workspace secret key.
      * @throws {Error} If the request failed due to some error.
      */
-  async getSecretKey(config = {}) {
+  async getSecretKey (config = {}) {
     const uriPath = this.uriPath + '/secretkey'
     const result = await this.ac.handleV2Request(uriPath, 'GET', config, this.header)
     return result.workspaceKey
@@ -655,7 +654,7 @@ class WorkspaceAPI {
      * @method addFavorite
      * @throws {Error} If the request failed due to some error.
      */
-  async addFavorite(config = {}) {
+  async addFavorite (config = {}) {
     const uriPath = this.uriPath + '/favorite'
     await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
   }
@@ -665,7 +664,7 @@ class WorkspaceAPI {
      * @method removeFavorite
      * @throws {Error} If the request failed due to some error.
      */
-  async removeFavorite(config = {}) {
+  async removeFavorite (config = {}) {
     const uriPath = this.uriPath + '/favorite'
     await this.ac.handleV2Request(uriPath, 'DELETE', config, this.header)
   }
@@ -675,7 +674,7 @@ class WorkspaceAPI {
      * @method addDefault
      * @throws {Error} If the request failed due to some error.
      */
-  async addDefault(config = {}) {
+  async addDefault (config = {}) {
     const uriPath = this.uriPath + '/default'
     await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
   }
@@ -685,7 +684,7 @@ class WorkspaceAPI {
      * @method removeDefault
      * @throws {Error} If the request failed due to some error.
      */
-  async removeDefault(config = {}) {
+  async removeDefault (config = {}) {
     const uriPath = this.uriPath + '/default'
     await this.ac.handleV2Request(uriPath, 'DELETE', config, this.header)
   }
@@ -696,7 +695,7 @@ class WorkspaceAPI {
      * @returns {JSONArray} Workspace admin list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getAdmins(config = {}) {
+  async getAdmins (config = {}) {
     const uriPath = this.uriPath + '/admins'
     const result = await this.ac.handleV2Request(uriPath, 'GET', config, this.header)
     return result.workspaceAdmins
@@ -709,7 +708,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async addAdmins(emailIds, config = {}) {
+  async addAdmins (emailIds, config = {}) {
     const uriPath = this.uriPath + '/admins'
     config.emailIds = emailIds
 
@@ -723,7 +722,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async removeAdmins(emailIds, config = {}) {
+  async removeAdmins (emailIds, config = {}) {
     const uriPath = this.uriPath + '/admins'
     config.emailIds = emailIds
 
@@ -736,7 +735,7 @@ class WorkspaceAPI {
      * @returns {Object} Workspace share info.
      * @throws {Error} If the request failed due to some error.
      */
-  async getShareInfo() {
+  async getShareInfo () {
     const uriPath = this.uriPath + '/share'
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result
@@ -751,7 +750,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async shareViews(viewIds, emailIds, permissions, config = {}) {
+  async shareViews (viewIds, emailIds, permissions, config = {}) {
     const uriPath = this.uriPath + '/share'
     config.viewIds = viewIds
     config.emailIds = emailIds
@@ -767,7 +766,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async removeShare(viewIds, emailIds, config = {}) {
+  async removeShare (viewIds, emailIds, config = {}) {
     const uriPath = this.uriPath + '/share'
     if (viewIds != null) {
       config.viewIds = viewIds
@@ -783,7 +782,7 @@ class WorkspaceAPI {
      * @returns {JSONArray} Folder list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getFolders() {
+  async getFolders () {
     const uriPath = this.uriPath + '/folders'
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result.folders
@@ -797,7 +796,7 @@ class WorkspaceAPI {
      * @returns {String} Created folder id.
      * @throws {Error} If the request failed due to some error.
      */
-  async createFolder(folderName, config = {}) {
+  async createFolder (folderName, config = {}) {
     const uriPath = this.uriPath + '/folders'
     config.folderName = folderName
     const result = await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
@@ -811,7 +810,7 @@ class WorkspaceAPI {
      * @returns {JSONArray} View list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getViews(config = {}) {
+  async getViews (config = {}) {
     const uriPath = this.uriPath + '/views'
     const result = await this.ac.handleV2Request(uriPath, 'GET', config, this.header)
     return result.views
@@ -827,7 +826,7 @@ class WorkspaceAPI {
      * @returns {JSONArray} View list.
      * @throws {Error} If the request failed due to some error.
      */
-  async copyViews(viewIds, destWorkspaceId, config = {}, destOrgId = null) {
+  async copyViews (viewIds, destWorkspaceId, config = {}, destOrgId = null) {
     const uriPath = this.uriPath + '/views/copy'
     config.viewIds = viewIds
     config.destWorkspaceId = destWorkspaceId
@@ -844,7 +843,7 @@ class WorkspaceAPI {
      * @method enableDomainAccess
      * @throws {Error} If the request failed due to some error.
      */
-  async enableDomainAccess() {
+  async enableDomainAccess () {
     const uriPath = this.uriPath + '/wlaccess'
     await this.ac.handleV2Request(uriPath, 'POST', null, this.header)
   }
@@ -854,7 +853,7 @@ class WorkspaceAPI {
      * @method disableDomainAccess
      * @throws {Error} If the request failed due to some error.
      */
-  async disableDomainAccess() {
+  async disableDomainAccess () {
     const uriPath = this.uriPath + '/wlaccess'
     await this.ac.handleV2Request(uriPath, 'DELETE', null, this.header)
   }
@@ -867,7 +866,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async renameFolder(folderId, newFolderName, config = {}) {
+  async renameFolder (folderId, newFolderName, config = {}) {
     config.folderName = newFolderName
     const uriPath = this.uriPath + '/folders/' + folderId
     await this.ac.handleV2Request(uriPath, 'PUT', config, this.header)
@@ -879,7 +878,7 @@ class WorkspaceAPI {
      * @param {String} folderId - Id of the folder to be deleted.
      * @throws {Error} If the request failed due to some error.
      */
-  async deleteFolder(folderId) {
+  async deleteFolder (folderId) {
     const uriPath = this.uriPath + '/folders/' + folderId
     await this.ac.handleV2Request(uriPath, 'DELETE', null, this.header)
   }
@@ -890,7 +889,7 @@ class WorkspaceAPI {
      * @returns {JSONArray} Group list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getGroups() {
+  async getGroups () {
     const uriPath = this.uriPath + '/groups'
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result.groups
@@ -903,7 +902,7 @@ class WorkspaceAPI {
      * @returns {Object} Details of the specified group.
      * @throws {Error} If the request failed due to some error.
      */
-  async getGroupDetails(groupId) {
+  async getGroupDetails (groupId) {
     const uriPath = this.uriPath + '/groups/' + groupId
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result.groups
@@ -918,7 +917,7 @@ class WorkspaceAPI {
      * @returns {String} Created group id.
      * @throws {Error} If the request failed due to some error.
      */
-  async createGroup(groupName, emailIds, config = {}) {
+  async createGroup (groupName, emailIds, config = {}) {
     const uriPath = this.uriPath + '/groups'
 
     config.groupName = groupName
@@ -935,7 +934,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async renameGroup(groupId, newGroupName, config = {}) {
+  async renameGroup (groupId, newGroupName, config = {}) {
     config.groupName = newGroupName
     const uriPath = this.uriPath + '/groups/' + groupId
     await this.ac.handleV2Request(uriPath, 'PUT', config, this.header)
@@ -949,7 +948,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async addGroupMembers(groupId, emailIds, config = {}) {
+  async addGroupMembers (groupId, emailIds, config = {}) {
     config.emailIds = emailIds
     const uriPath = this.uriPath + '/groups/' + groupId + '/members'
     await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
@@ -963,7 +962,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async removeGroupMembers(groupId, emailIds, config = {}) {
+  async removeGroupMembers (groupId, emailIds, config = {}) {
     config.emailIds = emailIds
     const uriPath = this.uriPath + '/groups/' + groupId + '/members'
     await this.ac.handleV2Request(uriPath, 'DELETE', config, this.header)
@@ -975,7 +974,7 @@ class WorkspaceAPI {
      * @param {String} groupId - The id of the group.
      * @throws {Error} If the request failed due to some error.
      */
-  async deleteGroup(groupId) {
+  async deleteGroup (groupId) {
     const uriPath = this.uriPath + '/groups/' + groupId
     await this.ac.handleV2Request(uriPath, 'DELETE', null, this.header)
   }
@@ -989,7 +988,7 @@ class WorkspaceAPI {
      * @returns {String} Id of the created slideshow.
      * @throws {Error} If the request failed due to some error.
      */
-  async createSlideshow(slideName, viewIds, config = {}) {
+  async createSlideshow (slideName, viewIds, config = {}) {
     const uriPath = this.uriPath + '/slides'
     config.slideName = slideName
     config.viewIds = viewIds
@@ -1004,7 +1003,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains the control configurations
      * @throws {Error} If the request failed due to some error.
      */
-  async updateSlideshow(slideId, config = {}) {
+  async updateSlideshow (slideId, config = {}) {
     const uriPath = this.uriPath + '/slides/' + slideId
     await this.ac.handleV2Request(uriPath, 'PUT', config, this.header)
   }
@@ -1015,7 +1014,7 @@ class WorkspaceAPI {
      * @param {String} slideId - Id of the slideshow.
      * @throws {Error} If the request failed due to some error.
      */
-  async deleteSlideshow(slideId) {
+  async deleteSlideshow (slideId) {
     const uriPath = this.uriPath + '/slides/' + slideId
     await this.ac.handleV2Request(uriPath, 'DELETE', null, this.header)
   }
@@ -1026,7 +1025,7 @@ class WorkspaceAPI {
      * @returns {JSONArray} Slideshow list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getSlideshows() {
+  async getSlideshows () {
     const uriPath = this.uriPath + '/slides'
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result.slideshows
@@ -1040,7 +1039,7 @@ class WorkspaceAPI {
      * @returns {String} Slideshow URL.
      * @throws {Error} If the request failed due to some error.
      */
-  async getSlideshowUrl(slideId, config = {}) {
+  async getSlideshowUrl (slideId, config = {}) {
     const uriPath = this.uriPath + '/slides/' + slideId + '/publish'
     const result = await this.ac.handleV2Request(uriPath, 'GET', config, this.header)
     return result.slideUrl
@@ -1053,7 +1052,7 @@ class WorkspaceAPI {
      * @returns {Object} Slideshow details.
      * @throws {Error} If the request failed due to some error.
      */
-  async getSlideshowDetails(slideId) {
+  async getSlideshowDetails (slideId) {
     const uriPath = this.uriPath + '/slides/' + slideId
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result.slideInfo
@@ -1069,7 +1068,7 @@ class WorkspaceAPI {
      * @returns {String} Id of the created variable.
      * @throws {Error} If the request failed due to some error.
      */
-  async createVariable(variableName, variableDataType, variableType, config = {}) {
+  async createVariable (variableName, variableDataType, variableType, config = {}) {
     const uriPath = this.uriPath + '/variables'
     config.variableName = variableName
     config.variableDataType = variableDataType
@@ -1088,7 +1087,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains the control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async updateVariable(variableId, variableName, variableDataType, variableType, config = {}) {
+  async updateVariable (variableId, variableName, variableDataType, variableType, config = {}) {
     const uriPath = this.uriPath + '/variables/' + variableId
     config.variableName = variableName
     config.variableDataType = variableDataType
@@ -1102,7 +1101,7 @@ class WorkspaceAPI {
      * @param {String} variableId - Id of the variable.
      * @throws {Error} If the request failed due to some error.
      */
-  async deleteVariable(variableId) {
+  async deleteVariable (variableId) {
     const uriPath = this.uriPath + '/variables/' + variableId
     await this.ac.handleV2Request(uriPath, 'DELETE', null, this.header)
   }
@@ -1113,7 +1112,7 @@ class WorkspaceAPI {
      * @returns {JSONArray} Variable list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getVariables() {
+  async getVariables () {
     const uriPath = this.uriPath + '/variables'
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result.variables
@@ -1126,7 +1125,7 @@ class WorkspaceAPI {
      * @returns {Object} Variable details.
      * @throws {Error} If the request failed due to some error.
      */
-  async getVariableDetails(variableId) {
+  async getVariableDetails (variableId) {
     const uriPath = this.uriPath + '/variables/' + variableId
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result
@@ -1138,7 +1137,7 @@ class WorkspaceAPI {
      * @param {String} folderId - Id of the folder.
      * @throws {Error} If the request failed due to some error.
      */
-  async makeDefaultFolder(folderId) {
+  async makeDefaultFolder (folderId) {
     const uriPath = this.uriPath + '/folders/' + folderId + '/default'
     await this.ac.handleV2Request(uriPath, 'PUT', null, this.header)
   }
@@ -1149,7 +1148,7 @@ class WorkspaceAPI {
      * @returns {JSONArray} Datasource list.
      * @throws {Error} If the request failed due to some error.
      */
-  async getDatasources() {
+  async getDatasources () {
     const uriPath = this.uriPath + '/datasources'
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result.dataSources
@@ -1162,7 +1161,7 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async syncData(datasourceId, config = {}) {
+  async syncData (datasourceId, config = {}) {
     const uriPath = this.uriPath + '/datasources/' + datasourceId + '/sync'
     await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
   }
@@ -1174,14 +1173,14 @@ class WorkspaceAPI {
      * @param {Object} config={} - Contains the control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async updateDatasourceConnection(datasourceId, config = {}) {
+  async updateDatasourceConnection (datasourceId, config = {}) {
     const uriPath = this.uriPath + '/datasources/' + datasourceId
     await this.ac.handleV2Request(uriPath, 'PUT', config, this.header)
   }
 }
 
 class ViewAPI {
-  constructor(ac, orgId, workspaceId, viewId) {
+  constructor (ac, orgId, workspaceId, viewId) {
     this.ac = ac
     this.uriPath = '/restapi/v2/workspaces/' + workspaceId + '/views/' + viewId
     this.header = {}
@@ -1195,7 +1194,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async rename(viewName, config = {}) {
+  async rename (viewName, config = {}) {
     config.viewName = viewName
     await this.ac.handleV2Request(this.uriPath, 'PUT', config, this.header)
   }
@@ -1206,7 +1205,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async delete(config = {}) {
+  async delete (config = {}) {
     await this.ac.handleV2Request(this.uriPath, 'DELETE', config, this.header)
   }
 
@@ -1218,7 +1217,7 @@ class ViewAPI {
      * @returns {String} Newly created view id.
      * @throws {Error} If the request failed due to some error.
      */
-  async saveAs(newViewName, config = {}) {
+  async saveAs (newViewName, config = {}) {
     const uriPath = this.uriPath + '/saveas'
     config.viewName = newViewName
     const result = await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
@@ -1234,7 +1233,7 @@ class ViewAPI {
      * @param {String} destOrgId=null - Id of the organization where the destination workspace is present.
      * @throws {Error} If the request failed due to some error.
      */
-  async copyFormulas(formulaNames, destWorkspaceId, config = {}, destOrgId = null) {
+  async copyFormulas (formulaNames, destWorkspaceId, config = {}, destOrgId = null) {
     const uriPath = this.uriPath + '/formulas/copy'
     config.formulaColumnNames = formulaNames
     config.destWorkspaceId = destWorkspaceId
@@ -1250,7 +1249,7 @@ class ViewAPI {
      * @method addFavorite
      * @throws {Error} If the request failed due to some error.
      */
-  async addFavorite(config = {}) {
+  async addFavorite (config = {}) {
     const uriPath = this.uriPath + '/favorite'
     await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
   }
@@ -1260,7 +1259,7 @@ class ViewAPI {
      * @method removeFavorite
      * @throws {Error} If the request failed due to some error.
      */
-  async removeFavorite(config = {}) {
+  async removeFavorite (config = {}) {
     const uriPath = this.uriPath + '/favorite'
     await this.ac.handleV2Request(uriPath, 'DELETE', config, this.header)
   }
@@ -1273,7 +1272,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async createSimilarViews(refViewId, folderId, config = {}) {
+  async createSimilarViews (refViewId, folderId, config = {}) {
     const uriPath = this.uriPath + '/similarviews'
     config.referenceViewId = refViewId
     config.folderId = folderId
@@ -1286,7 +1285,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async autoAnalyse(config = {}) {
+  async autoAnalyse (config = {}) {
     const uriPath = this.uriPath + '/autoanalyse'
     await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
   }
@@ -1297,7 +1296,7 @@ class ViewAPI {
      * @returns {Object} Permission details.
      * @throws {Error} If the request failed due to some error.
      */
-  async getMyPermissions() {
+  async getMyPermissions () {
     const uriPath = this.uriPath + '/share/mypermissions'
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result.permissions
@@ -1310,7 +1309,7 @@ class ViewAPI {
      * @returns {String} View URL.
      * @throws {Error} If the request failed due to some error.
      */
-  async getViewUrl(config = {}) {
+  async getViewUrl (config = {}) {
     const uriPath = this.uriPath + '/publish'
     const result = await this.ac.handleV2Request(uriPath, 'GET', config, this.header)
     return result.viewUrl
@@ -1323,7 +1322,7 @@ class ViewAPI {
      * @returns {String} Embed URL.
      * @throws {Error} If the request failed due to some error.
      */
-  async getEmbedUrl(config = {}) {
+  async getEmbedUrl (config = {}) {
     const uriPath = this.uriPath + '/publish/embed'
     const result = await this.ac.handleV2Request(uriPath, 'GET', config, this.header)
     return result.embedUrl
@@ -1336,7 +1335,7 @@ class ViewAPI {
      * @returns {String} Private URL.
      * @throws {Error} If the request failed due to some error.
      */
-  async getPrivateUrl(config = {}) {
+  async getPrivateUrl (config = {}) {
     const uriPath = this.uriPath + '/publish/privatelink'
     const result = await this.ac.handleV2Request(uriPath, 'GET', config, this.header)
     return result.privateUrl
@@ -1349,7 +1348,7 @@ class ViewAPI {
      * @returns {String} Private URL.
      * @throws {Error} If the request failed due to some error.
      */
-  async createPrivateUrl(config = {}) {
+  async createPrivateUrl (config = {}) {
     const uriPath = this.uriPath + '/publish/privatelink'
     const result = await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
     return result.privateUrl
@@ -1364,7 +1363,7 @@ class ViewAPI {
      * @returns {String} Created column id.
      * @throws {Error} If the request failed due to some error.
      */
-  async addColumn(columnName, dataType, config = {}) {
+  async addColumn (columnName, dataType, config = {}) {
     const uriPath = this.uriPath + '/columns'
     config.columnName = columnName
     config.dataType = dataType
@@ -1379,7 +1378,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async hideColumns(columnIds, config = {}) {
+  async hideColumns (columnIds, config = {}) {
     const uriPath = this.uriPath + '/columns/hide'
     config.columnIds = columnIds
     await this.ac.handleV2Request(uriPath, 'PUT', config, this.header)
@@ -1392,7 +1391,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async showColumns(columnIds, config = {}) {
+  async showColumns (columnIds, config = {}) {
     const uriPath = this.uriPath + '/columns/show'
     config.columnIds = columnIds
     await this.ac.handleV2Request(uriPath, 'PUT', config, this.header)
@@ -1406,7 +1405,7 @@ class ViewAPI {
      * @returns {Object} Column Names and Added Row Values.
      * @throws {Error} If the request failed due to some error.
      */
-  async addRow(columnValues, config = {}) {
+  async addRow (columnValues, config = {}) {
     const uriPath = this.uriPath + '/rows'
     config.columns = columnValues
     const result = await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
@@ -1422,7 +1421,7 @@ class ViewAPI {
      * @returns {Object} Updated Columns List and Updated Rows Count.
      * @throws {Error} If the request failed due to some error.
      */
-  async updateRow(columnValues, criteria, config = {}) {
+  async updateRow (columnValues, criteria, config = {}) {
     const uriPath = this.uriPath + '/rows'
     config.columns = columnValues
     if (criteria != null && criteria.length > 0) {
@@ -1441,7 +1440,7 @@ class ViewAPI {
      * @returns {int} Deleted rows count.
      * @throws {Error} If the request failed due to some error.
      */
-  async deleteRow(criteria, config = {}) {
+  async deleteRow (criteria, config = {}) {
     const uriPath = this.uriPath + '/rows'
     if (criteria != null && criteria.length > 0) {
       config.criteria = criteria
@@ -1459,7 +1458,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async renameColumn(columnId, newColumnName, config = {}) {
+  async renameColumn (columnId, newColumnName, config = {}) {
     const uriPath = this.uriPath + '/columns/' + columnId
     config.columnName = newColumnName
     await this.ac.handleV2Request(uriPath, 'PUT', config, this.header)
@@ -1472,7 +1471,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async deleteColumn(columnId, config = {}) {
+  async deleteColumn (columnId, config = {}) {
     const uriPath = this.uriPath + '/columns/' + columnId
     await this.ac.handleV2Request(uriPath, 'DELETE', config, this.header)
   }
@@ -1486,7 +1485,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async addLookup(columnId, refViewId, refColumnId, config = {}) {
+  async addLookup (columnId, refViewId, refColumnId, config = {}) {
     const uriPath = this.uriPath + '/columns/' + columnId + '/lookup'
     config.referenceViewId = refViewId
     config.referenceColumnId = refColumnId
@@ -1500,7 +1499,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async removeLookup(columnId, config = {}) {
+  async removeLookup (columnId, config = {}) {
     const uriPath = this.uriPath + '/columns/' + columnId + '/lookup'
     await this.ac.handleV2Request(uriPath, 'DELETE', config, this.header)
   }
@@ -1512,7 +1511,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async autoAnalyseColumn(columnId, config = {}) {
+  async autoAnalyseColumn (columnId, config = {}) {
     const uriPath = this.uriPath + '/columns/' + columnId + '/autoanalyse'
     await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
   }
@@ -1524,7 +1523,7 @@ class ViewAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async refetchData(config = {}) {
+  async refetchData (config = {}) {
     const uriPath = this.uriPath + '/sync'
     await this.ac.handleV2Request(uriPath, 'POST', config, this.header)
   }
@@ -1535,7 +1534,7 @@ class ViewAPI {
      * @returns {int} Last import details.
      * @throws {Error} If the request failed due to some error.
      */
-  async getLastImportDetails() {
+  async getLastImportDetails () {
     const uriPath = this.uriPath + '/importdetails'
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result
@@ -1543,7 +1542,7 @@ class ViewAPI {
 }
 
 class BulkAPI {
-  constructor(ac, orgId, workspaceId) {
+  constructor (ac, orgId, workspaceId) {
     this.ac = ac
     this.uriPath = '/restapi/v2/workspaces/' + workspaceId
     this.bulkUriPath = '/restapi/v2/bulk/workspaces/' + workspaceId
@@ -1562,7 +1561,7 @@ class BulkAPI {
      * @return {JSONObject} Import result.
      * @throws {Error} If the request failed due to some error.
      */
-  async importDataInNewTable(tableName, fileType, autoIdentify, filePath, config = {}) {
+  async importDataInNewTable (tableName, fileType, autoIdentify, filePath, config = {}) {
     const uriPath = this.uriPath + '/data'
     config.tableName = tableName
     config.fileType = fileType
@@ -1583,7 +1582,7 @@ class BulkAPI {
      * @return {JSONObject} Import result.
      * @throws {Error} If the request failed due to some error.
      */
-  async importRawDataInNewTable(tableName, fileType, autoIdentify, data, config = {}) {
+  async importRawDataInNewTable (tableName, fileType, autoIdentify, data, config = {}) {
     const uriPath = this.uriPath + '/data'
     config.tableName = tableName
     config.fileType = fileType
@@ -1605,7 +1604,7 @@ class BulkAPI {
      * @return {JSONObject} Import result.
      * @throws {Error} If the request failed due to some error.
      */
-  async importData(viewId, importType, fileType, autoIdentify, filePath, config = {}) {
+  async importData (viewId, importType, fileType, autoIdentify, filePath, config = {}) {
     const uriPath = this.uriPath + '/views/' + viewId + '/data'
     config.importType = importType
     config.fileType = fileType
@@ -1627,7 +1626,7 @@ class BulkAPI {
      * @return {JSONObject} Import result.
      * @throws {Error} If the request failed due to some error.
      */
-  async importRawData(viewId, importType, fileType, autoIdentify, data, config = {}) {
+  async importRawData (viewId, importType, fileType, autoIdentify, data, config = {}) {
     const uriPath = this.uriPath + '/views/' + viewId + '/data'
     config.importType = importType
     config.fileType = fileType
@@ -1648,7 +1647,7 @@ class BulkAPI {
      * @return {String} Import job id.
      * @throws {Error} If the request failed due to some error.
      */
-  async importBulkDataInNewTable(tableName, fileType, autoIdentify, filePath, config = {}) {
+  async importBulkDataInNewTable (tableName, fileType, autoIdentify, filePath, config = {}) {
     const uriPath = this.bulkUriPath + '/data'
     config.tableName = tableName
     config.fileType = fileType
@@ -1670,7 +1669,7 @@ class BulkAPI {
      * @return {String} Import job id.
      * @throws {Error} If the request failed due to some error.
      */
-  async importBulkData(viewId, importType, fileType, autoIdentify, filePath, config = {}) {
+  async importBulkData (viewId, importType, fileType, autoIdentify, filePath, config = {}) {
     const uriPath = this.bulkUriPath + '/views/' + viewId + '/data'
     config.importType = importType
     config.fileType = fileType
@@ -1687,7 +1686,7 @@ class BulkAPI {
      * @return {JSONObject} Import job details.
      * @throws {Error} If the request failed due to some error.
      */
-  async getImportJobDetails(jobId) {
+  async getImportJobDetails (jobId) {
     const uriPath = this.bulkUriPath + '/importjobs/' + jobId
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result
@@ -1702,7 +1701,7 @@ class BulkAPI {
      * @param {Object} config={} - Contains any additional control attributes.
      * @throws {Error} If the request failed due to some error.
      */
-  async exportData(viewId, responseFormat, filePath, config = {}) {
+  async exportData (viewId, responseFormat, filePath, config = {}) {
     const uriPath = this.uriPath + '/views/' + viewId + '/data'
     config.responseFormat = responseFormat
     await this.ac.handleExportRequest(uriPath, filePath, config, this.header)
@@ -1717,7 +1716,7 @@ class BulkAPI {
      * @return {String} Export job id.
      * @throws {Error} If the request failed due to some error.
      */
-  async initiateBulkExport(viewId, responseFormat, config = {}) {
+  async initiateBulkExport (viewId, responseFormat, config = {}) {
     const uriPath = this.bulkUriPath + '/views/' + viewId + '/data'
     config.responseFormat = responseFormat
     const result = await this.ac.handleV2Request(uriPath, 'GET', config, this.header)
@@ -1733,7 +1732,7 @@ class BulkAPI {
      * @return {String} Export job id.
      * @throws {Error} If the request failed due to some error.
      */
-  async initiateBulkExportUsingSQL(sqlQuery, responseFormat, config = {}) {
+  async initiateBulkExportUsingSQL (sqlQuery, responseFormat, config = {}) {
     const uriPath = this.bulkUriPath + '/data'
     config.sqlQuery = sqlQuery
     config.responseFormat = responseFormat
@@ -1748,7 +1747,7 @@ class BulkAPI {
      * @return {JSONObject} Export job details.
      * @throws {Error} If the request failed due to some error.
      */
-  async getExportJobDetails(jobId) {
+  async getExportJobDetails (jobId) {
     const uriPath = this.bulkUriPath + '/exportjobs/' + jobId
     const result = await this.ac.handleV2Request(uriPath, 'GET', null, this.header)
     return result
@@ -1761,7 +1760,7 @@ class BulkAPI {
      * @param {String} filePath - Path of the file where the data exported to be stored.
      * @throws {Error} If the request failed due to some error.
      */
-  async exportBulkData(jobId, filePath) {
+  async exportBulkData (jobId, filePath) {
     const uriPath = this.bulkUriPath + '/exportjobs/' + jobId + '/data'
     await this.ac.handleExportRequest(uriPath, filePath, null, this.header)
   }

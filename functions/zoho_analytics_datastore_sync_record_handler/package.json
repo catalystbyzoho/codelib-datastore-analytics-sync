@@ -1,0 +1,13 @@
+{
+	"name": "zoho_analytics_datastore_sync_record_handler",
+	"version": "1.0.0",
+	"main": "index.js",
+	"author": "solutions@zohocatalyst.com",
+	"dependencies": {
+		"zcatalyst-sdk-node": "2.5.1",
+		"fs": "0.0.1-security",
+		"https": "1.0.0",
+		"querystring": "0.2.1",
+		"request": "^2.88.2"
+	}
+}

@@ -1,0 +1,59 @@
+name: AnalyticsSync Release # Release name
+
+#Workflow will be started only if a tag is created with name starts with 'v'
+on:
+  push:
+    tags:
+      - "v*" # P
+jobs:
+  build:
+# Environment to load the secrets
+    environment: analyticsSync
+#Job name
+    name: Creating AnalyticsSync Release  
+    runs-on: ubuntu-latest
+    steps:
+#This step is used to clone the repository
+      - name: Cloning repository 
+        uses: actions/checkout@v2
+#This step is used to install node 18.
+      - name: Installing node-18
+        uses: actions/setup-node@v2 
+        with:
+          node-version: '18'
+#This step is used to install zcatalyst-cli@1.17.3.
+      - name: Installing Catalyst CLI 
+        run: npm i -g zcatalyst-cli@1.17.3
+#This step is used to download node dependencies from package.json
+      - name: Downloading dependencies for zoho_analytics_datastore_sync_record_handler
+        working-directory: ./functions/zoho_analytics_datastore_sync_record_handler
+        run: npm install --omit=dev
+      - name: Downloading dependencies for zoho_analytics_datastore_sync_routes_handler
+        working-directory: ./functions/zoho_analytics_datastore_sync_routes_handler
+        run: npm install --omit=dev
+#This step is used to deploy the code to a catalyst project, catalyst deploy process is done to compile the java code
+      - name: Deploying to Catalyst 
+        run: catalyst deploy --project ${{ secrets.CATALYST_PROJECT_NAME }} --org ${{ secrets.CATALYST_ORG }} --token ${{ secrets.CATALYST_TOKEN }}
+#Creating a release directory
+      - name: Creating release directory
+        run: mkdir -p release/functions
+#Creating a zip of the functions
+      - name: Creating a zip for zoho_analytics_datastore_sync_record_handler
+        working-directory: ./functions/zoho_analytics_datastore_sync_record_handler
+        run: zip -r ../../release/functions/zoho_analytics_datastore_sync_record_handler.zip .
+      - name: Creating a zip for zoho_analytics_datastore_sync_routes_handler
+        working-directory: ./functions/zoho_analytics_datastore_sync_routes_handler
+        run: zip -r ../../release/functions/zoho_analytics_datastore_sync_routes_handler.zip .
+#Copying project-template-1.0.0.json to release
+      - name: Copying project-template-1.0.0.json
+        run: cp project-template-1.0.0.json release/project-template-1.0.0.json
+#Generating the release zip
+      - name: Generating release
+        run: cd release && zip -r release.zip .
+#Generating the artifacts and creating a release with status as 'draft'
+      - name: Generating artifacts
+        uses: ncipollo/release-action@v1
+        with:
+          draft: true
+          tag: ${{ env.RELEASE_VERSION }}
+          artifacts: "./release/release.zip"

@@ -1,5 +1,6 @@
 .build
 .catalystrc
+.DS_Store
 
 
 **/node_modules
@@ -7,5 +8,3 @@
 **/catalyst-debug.log
 
 node_modules
-catalyst.json
-package.json
