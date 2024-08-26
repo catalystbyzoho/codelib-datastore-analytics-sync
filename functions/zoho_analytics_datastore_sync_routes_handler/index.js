@@ -193,6 +193,7 @@ app.post('/import-analytics', async (req, res) => {
 
 app.post('/row', async (req, res) => {
   try {
+    const catalystApp = catalyst.initialize(req)
     const orgId = req.body.orgId
     const viewId = req.body.viewId
     const workspaceId = req.body.workspaceId
@@ -224,7 +225,6 @@ app.post('/row', async (req, res) => {
 
     const analyticsInstance = AnalyticsService.getInstance()
     const viewInstance = analyticsInstance.getViewInstance(orgId, workspaceId, viewId)
-    const catalystApp = catalyst.initialize(req)
     const data = await catalystApp.datastore().table(tableName).getRow(rowId)
     if (data == null) {
       res.status(400).send({
