@@ -156,7 +156,7 @@ app.post('/export-datastore', async (req, res) => {
 
 app.post('/import-analytics', async (req, res) => {
   const catalystApp = catalyst.initialize(req)
-  const tableName = req.body.tableName
+  const tableName = req.query.tableName
   const cache = catalystApp.cache()
   const segment = await cache.getSegmentDetails(AppConstants.CatalystComponents.Segment.Analytics)
   try {
