@@ -1,27 +1,29 @@
-name: AnalyticsSync Release 
+name: AnalyticsSync Release
 
 on:
   push:
     tags:
       - "v*"
+
+permissions:
+  contents: write
+  
 jobs:
   build:
-
     environment: Production
 
-    name: Creating AnalyticsSync Release  
+    name: Creating AnalyticsSync Release
     runs-on: ubuntu-latest
     steps:
-
-      - name: Cloning repository 
+      - name: Cloning repository
         uses: actions/checkout@v2
 
       - name: Installing node-18
-        uses: actions/setup-node@v2 
+        uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: "18"
 
-      - name: Installing Catalyst CLI 
+      - name: Installing Catalyst CLI
         run: npm i -g zcatalyst-cli@1.17.3
 
       - name: Downloading dependencies for zoho_analytics_datastore_sync_record_handler
@@ -31,7 +33,7 @@ jobs:
         working-directory: ./functions/zoho_analytics_datastore_sync_routes_handler
         run: npm install --omit=dev
 
-      - name: Deploying to Catalyst 
+      - name: Deploying to Catalyst
         run: catalyst deploy --project ${{ secrets.CATALYST_PROJECT_NAME }} --org ${{ secrets.CATALYST_ORG }} --token ${{ secrets.CATALYST_TOKEN }}
 
       - name: Creating release directory
